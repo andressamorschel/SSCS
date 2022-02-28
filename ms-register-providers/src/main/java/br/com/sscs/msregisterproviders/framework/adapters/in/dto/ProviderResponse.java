@@ -1,8 +1,9 @@
 package br.com.sscs.msregisterproviders.framework.adapters.in.dto;
 
 import br.com.sscs.msregisterproviders.domain.enums.Address;
-import lombok.Builder;
 import lombok.Data;
+
+import java.util.UUID;
 
 @Data
 public class ProviderResponse {

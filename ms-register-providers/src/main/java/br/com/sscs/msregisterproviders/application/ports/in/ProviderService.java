@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface ProviderService {
 
     ProviderResponse createProvider(ProviderRequest request);
-    void deleteProvider(UUID providerId);
+    void deleteByProviderId(String providerId);
     ProviderResponse updateProvider(UUID providerId, ProviderRequest request);
     List<ProviderResponse> findAllProviders();
     Optional<ProviderResponse> findProvidersByProviderId();

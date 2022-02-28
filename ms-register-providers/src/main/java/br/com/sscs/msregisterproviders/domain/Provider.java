@@ -17,7 +17,7 @@ public class Provider {
     @Id
     private String id;
 
-    private UUID providerId;
+    private String providerId;
 
     private String name;
 

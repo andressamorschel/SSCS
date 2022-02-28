@@ -10,6 +10,6 @@ public interface ProviderRepository {
 
     Provider createProvider(Provider provider);
     List<Provider> findAllProviders();
-    Optional<Provider> findProvidersById(UUID providerId);
-    void deleteProvider(UUID providerId);
+    Optional<Provider> findProviderById(String providerId);
+    void deleteByProviderId(String providerId);
 }

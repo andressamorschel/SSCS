@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public class ProviderRepositoryImpl implements ProviderRepository {
@@ -26,13 +25,13 @@ public class ProviderRepositoryImpl implements ProviderRepository {
     }
 
     @Override
-    public Optional<Provider> findProvidersById(UUID providerId) {
+    public Optional<Provider> findProviderById(String providerId) {
         return providerMongoRepository.findByProviderId(providerId);
     }
 
     @Override
-    public void deleteProvider(UUID providerId) {
-        providerMongoRepository.deleteById(providerId.toString());
+    public void deleteByProviderId(String providerId) {
+        providerMongoRepository.deleteByProviderId(providerId);
     }
 
 

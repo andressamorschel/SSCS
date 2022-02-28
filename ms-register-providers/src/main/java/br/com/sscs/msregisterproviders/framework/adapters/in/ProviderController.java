@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RequestMapping("/providers")
 @RestController
 @RequiredArgsConstructor
@@ -19,4 +22,17 @@ public class ProviderController {
     public ProviderResponse createProvider(@RequestBody ProviderRequest request){
         return providerService.createProvider(request);
     }
+
+    @DeleteMapping("/{providerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteByProviderId(@PathVariable String providerId){
+        providerService.deleteByProviderId(providerId);
+    }
+
+    @GetMapping
+    public List<ProviderResponse> findAllProviders(){
+        return providerService.findAllProviders();
+    }
+
+
 }

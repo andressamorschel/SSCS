@@ -4,6 +4,7 @@ import br.com.sscs.msregisterproviders.application.ports.in.ProviderService;
 import br.com.sscs.msregisterproviders.application.ports.out.ProviderRepository;
 import br.com.sscs.msregisterproviders.framework.adapters.in.dto.ProviderRequest;
 import br.com.sscs.msregisterproviders.framework.adapters.in.dto.ProviderResponse;
+import br.com.sscs.msregisterproviders.framework.adapters.in.exceptions.ProviderNotFoundException;
 import br.com.sscs.msregisterproviders.framework.adapters.in.mapper.ProviderMapper;
 
 import java.time.LocalDate;
@@ -25,14 +26,19 @@ public class ProviderServiceImpl implements ProviderService {
     public ProviderResponse createProvider(ProviderRequest request) {
         var provider = providerMapper.requestToEntity(request);
         provider.setCreatedOn(LocalDate.now());
-        provider.setProviderId(UUID.randomUUID());
+        provider.setProviderId(UUID.randomUUID().toString());
         providerRepository.createProvider(provider);
         return providerMapper.entityToResponse(provider);
     }
 
     @Override
-    public void deleteProvider(UUID providerId) {
+    public void deleteByProviderId(String providerId) {
+        if (providerRepository.findProviderById(providerId).isEmpty()) {
+            throw new ProviderNotFoundException(
+                    String.format("provider not found with id: %b", providerId));
+        }
 
+        providerRepository.deleteByProviderId(providerId);
     }
 
     @Override
@@ -42,7 +48,7 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public List<ProviderResponse> findAllProviders() {
-        return null;
+        return providerMapper.entityToListResponse(providerRepository.findAllProviders());
     }
 
     @Override

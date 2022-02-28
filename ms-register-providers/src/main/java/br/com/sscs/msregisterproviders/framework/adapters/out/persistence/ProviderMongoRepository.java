@@ -8,5 +8,6 @@ import java.util.UUID;
 
 public interface ProviderMongoRepository extends MongoRepository<Provider, String> {
 
-    Optional<Provider> findByProviderId(UUID providerId);
+    Optional<Provider> findByProviderId(String providerId);
+    void deleteByProviderId(String providerId);
 }

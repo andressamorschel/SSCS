@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 public class ProviderMapper {
@@ -19,6 +22,12 @@ public class ProviderMapper {
 
     public ProviderResponse entityToResponse(Provider provider){
         return modelMapper.map(provider, ProviderResponse.class);
+    }
+
+    public List<ProviderResponse> entityToListResponse(List<Provider> providers){
+        return providers.stream()
+                .map(this::entityToResponse)
+                .collect(Collectors.toList());
     }
 
 }
