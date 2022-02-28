@@ -7,24 +7,20 @@
 
 ## Technologies/dependencies:
 * Java
-* Spring Data JPA
 * Spring Rest
 * Spring Security
 * Spring boot Validation
 * Docker
-* PostgreSQL
 * Swagger
 * Gradle
 
 ## Features:
-- [x] Initialize database
 - [x] Configure the docker
-- [x] Create CRUD entities and methods for products and their suppliers
-- [x] Add entity validations with spring validator
+- [ ] Create microservice for provider
+- [ ] Create microservice for product
+- [ ] Create microservice for stock
+- [ ] Create microservice for sales
 - [ ] Implement spring security
-- [ ] Create inventory control feature
-- [ ] Create sales control feature
-- [ ] Handle API exceptions
 - [ ] Implement unit tests
 - [ ] Implement integration tests
 - [ ] Make API integration with Angular
