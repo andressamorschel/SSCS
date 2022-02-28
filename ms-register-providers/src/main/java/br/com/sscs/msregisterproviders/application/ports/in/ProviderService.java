@@ -13,5 +13,5 @@ public interface ProviderService {
     void deleteByProviderId(String providerId);
     ProviderResponse updateProvider(UUID providerId, ProviderRequest request);
     List<ProviderResponse> findAllProviders();
-    Optional<ProviderResponse> findProvidersByProviderId();
+    Optional<ProviderResponse> findByProviderId(String providerId);
 }

@@ -25,7 +25,7 @@ public class ProviderRepositoryImpl implements ProviderRepository {
     }
 
     @Override
-    public Optional<Provider> findProviderById(String providerId) {
+    public Optional<Provider> findByProviderId(String providerId) {
         return providerMongoRepository.findByProviderId(providerId);
     }
 
