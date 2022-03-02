@@ -7,14 +7,12 @@ import br.com.sscs.msregisterproviders.framework.adapters.in.dto.ProviderRequest
 import br.com.sscs.msregisterproviders.framework.adapters.in.dto.ProviderResponse;
 import br.com.sscs.msregisterproviders.framework.adapters.in.exceptions.ProviderNotFoundException;
 import br.com.sscs.msregisterproviders.framework.adapters.in.mapper.ProviderMapper;
-import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Slf4j
 public class ProviderServiceImpl implements ProviderService {
 
     private final ProviderRepository providerRepository;
@@ -54,7 +52,7 @@ public class ProviderServiceImpl implements ProviderService {
         provider.get().setEin(request.getEin());
         provider.get().setAddress(request.getAddress());
         provider.get().setTelephone(request.getTelephone());
-        
+
         return providerRepository.saveProvider(provider.get());
     }
 
