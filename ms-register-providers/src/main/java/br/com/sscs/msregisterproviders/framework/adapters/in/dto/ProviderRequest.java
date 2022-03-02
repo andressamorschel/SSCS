@@ -1,6 +1,7 @@
 package br.com.sscs.msregisterproviders.framework.adapters.in.dto;
 
 import br.com.sscs.msregisterproviders.domain.enums.Address;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -9,6 +10,9 @@ import javax.validation.constraints.Size;
 
 @Data
 public class ProviderRequest {
+
+    @JsonIgnore
+    private String providerId;
 
     @NotBlank
     private String name;

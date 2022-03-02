@@ -9,4 +9,5 @@ public interface ProviderMongoRepository extends MongoRepository<Provider, Strin
 
     Optional<Provider> findByProviderId(String providerId);
     void deleteByProviderId(String providerId);
+
 }

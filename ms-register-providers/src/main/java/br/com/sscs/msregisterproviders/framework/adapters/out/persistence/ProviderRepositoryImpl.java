@@ -15,8 +15,8 @@ public class ProviderRepositoryImpl implements ProviderRepository {
     ProviderMongoRepository providerMongoRepository;
 
     @Override
-    public Provider createProvider(Provider provider) {
-        return providerMongoRepository.insert(provider);
+    public Provider saveProvider(Provider provider) {
+        return providerMongoRepository.save(provider);
     }
 
     @Override
@@ -33,6 +33,4 @@ public class ProviderRepositoryImpl implements ProviderRepository {
     public void deleteByProviderId(String providerId) {
         providerMongoRepository.deleteByProviderId(providerId);
     }
-
-
 }

@@ -30,4 +30,13 @@ public class ProviderMapper {
                 .collect(Collectors.toList());
     }
 
+    public ProviderResponse requestToResponse(ProviderRequest request){
+        return modelMapper.map(request, ProviderResponse.class);
+    }
+
+
+    public Provider responseToEntity (ProviderResponse response){
+        return modelMapper.map(response, Provider.class);
+    }
+
 }
