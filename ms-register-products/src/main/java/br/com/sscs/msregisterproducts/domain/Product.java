@@ -23,4 +23,6 @@ public class Product {
 
     private LocalDate createdOn;
 
+    private String providerId;
+
 }

@@ -13,4 +13,5 @@ public class ProductResponse {
 
     private float price;
 
+    private String providerId;
 }

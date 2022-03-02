@@ -10,4 +10,6 @@ public class ProductRequest {
     private String brand;
 
     private float price;
+
+    private String providerId;
 }
