@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -17,14 +18,32 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<ProductResponse> findAllProducts(){
+    public List<ProductResponse> findAllProducts() {
         return productService.findAllProducts();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse saveProduct(@RequestBody ProductRequest productRequest){
+    public ProductResponse saveProduct(@RequestBody ProductRequest productRequest) {
         return productService.saveProduct(productRequest);
     }
+
+    @PutMapping("/{productId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductResponse updateProduct(@PathVariable String productId, @RequestBody ProductRequest productRequest) {
+        return productService.updateProduct(productId, productRequest);
+    }
+
+    @GetMapping("/{productId}")
+    public Optional<ProductResponse> findByProductId(@PathVariable String productId) {
+        return productService.findByProductId(productId);
+    }
+
+    @DeleteMapping("/{productId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProduct(@PathVariable String productId) {
+        productService.deleteByProductId(productId);
+    }
+
 
 }
