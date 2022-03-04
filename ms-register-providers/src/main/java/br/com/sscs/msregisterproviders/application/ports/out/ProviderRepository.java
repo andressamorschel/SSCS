@@ -8,7 +8,10 @@ import java.util.Optional;
 public interface ProviderRepository {
 
     Provider saveProvider(Provider provider);
+
     List<Provider> findAllProviders();
+
     Optional<Provider> findByProviderId(String providerId);
+
     void deleteByProviderId(String providerId);
 }

@@ -42,8 +42,8 @@ public class ProviderController {
 
     @PutMapping("/test/{providerId}")
     ResponseEntity<ProviderResponse> updateProvider(@PathVariable String providerId, @RequestBody ProviderRequest request) {
-        providerService.updateProvider(providerId, request);
-        return ResponseEntity.ok().build();
+        var provider = providerService.updateProvider(providerId, request);
+        return ResponseEntity.ok(provider);
     }
 
 }

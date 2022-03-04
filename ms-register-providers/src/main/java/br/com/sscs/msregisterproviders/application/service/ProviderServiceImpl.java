@@ -2,7 +2,6 @@ package br.com.sscs.msregisterproviders.application.service;
 
 import br.com.sscs.msregisterproviders.application.ports.in.ProviderService;
 import br.com.sscs.msregisterproviders.application.ports.out.ProviderRepository;
-import br.com.sscs.msregisterproviders.domain.Provider;
 import br.com.sscs.msregisterproviders.framework.adapters.in.dto.ProviderRequest;
 import br.com.sscs.msregisterproviders.framework.adapters.in.dto.ProviderResponse;
 import br.com.sscs.msregisterproviders.framework.adapters.in.exceptions.ProviderNotFoundException;
@@ -43,7 +42,7 @@ public class ProviderServiceImpl implements ProviderService {
     }
 
     @Override
-    public Provider updateProvider(String providerId, ProviderRequest request) {
+    public ProviderResponse updateProvider(String providerId, ProviderRequest request) {
         var provider = providerRepository.findByProviderId(providerId);
         request.setProviderId(providerId);
 
@@ -52,8 +51,8 @@ public class ProviderServiceImpl implements ProviderService {
         provider.get().setEin(request.getEin());
         provider.get().setAddress(request.getAddress());
         provider.get().setTelephone(request.getTelephone());
-
-        return providerRepository.saveProvider(provider.get());
+        provider = providerMapper.requestToOptionalEntity(request);
+        return providerMapper.entityToResponse(providerRepository.saveProvider(provider.get()));
     }
 
     @Override
