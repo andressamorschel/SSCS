@@ -3,18 +3,20 @@ package br.com.sscs.msregisterproducts.application.service;
 import br.com.sscs.msregisterproducts.application.ports.in.ProductService;
 import br.com.sscs.msregisterproducts.application.ports.out.ProductRepository;
 import br.com.sscs.msregisterproducts.domain.Product;
-import br.com.sscs.msregisterproducts.framework.adapters.client.ProductFeignClient;
+import br.com.sscs.msregisterproducts.framework.adapters.out.client.ProductFeignClient;
 import br.com.sscs.msregisterproducts.framework.adapters.in.dto.ProductRequest;
 import br.com.sscs.msregisterproducts.framework.adapters.in.dto.ProductResponse;
 import br.com.sscs.msregisterproducts.framework.adapters.in.exceptions.ProductNotFoundException;
 import br.com.sscs.msregisterproducts.framework.adapters.in.exceptions.ProviderNotFoundException;
 import br.com.sscs.msregisterproducts.framework.adapters.mapper.ProductMapper;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -33,11 +35,10 @@ public class ProductServiceImpl implements ProductService {
                 .findProviderById(request.getProviderId());
 
         if (providerExist.isEmpty()) {
-            throw new ProviderNotFoundException("provider not found with id" + request.getProviderId());
+            throw new ProviderNotFoundException(String.format("provider not found with id: %s", request.getProviderId()));
         }
 
-//        var product = productMapper.requestToEntity(request);
-        var product2 = Product.builder()
+        var product = Product.builder()
                 .productId(UUID.randomUUID().toString())
                 .brand(request.getBrand())
                 .createdOn(LocalDate.now())
@@ -46,11 +47,8 @@ public class ProductServiceImpl implements ProductService {
                 .providerId(request.getProviderId())
                 .build();
 
-//        product.setCreatedOn(LocalDate.now());
-//        product.setProductId(UUID.randomUUID().toString());
-
-        productRepository.saveProduct(product2);
-        return productMapper.entityToResponse(product2);
+        productRepository.saveProduct(product);
+        return productMapper.entityToResponse(product);
     }
 
     @Override
@@ -63,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
         var product = productRepository.findByProductId(productId);
 
         if (product.isEmpty()) {
-            throw new ProductNotFoundException("product not with id:" + productId);
+            throw new ProductNotFoundException(String.format("product not with id: %s", productId));
         }
 
         return Optional.of(productMapper.entityToResponse(product.get()));

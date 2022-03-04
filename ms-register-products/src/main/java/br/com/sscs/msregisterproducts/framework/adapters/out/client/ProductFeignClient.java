@@ -1,4 +1,4 @@
-package br.com.sscs.msregisterproducts.framework.adapters.client;
+package br.com.sscs.msregisterproducts.framework.adapters.out.client;
 
 import br.com.sscs.msregisterproducts.framework.adapters.in.dto.ProviderResponse;
 import org.springframework.cloud.openfeign.FeignClient;
