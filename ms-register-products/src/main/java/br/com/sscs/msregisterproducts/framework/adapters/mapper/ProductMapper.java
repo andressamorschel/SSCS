@@ -30,4 +30,8 @@ public class ProductMapper {
                 .map(this::entityToResponse)
                 .collect(Collectors.toList());
     }
+
+    public ProductRequest entityToRequest(Product product){
+        return modelMapper.map(product, ProductRequest.class);
+    }
 }

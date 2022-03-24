@@ -4,6 +4,7 @@ import br.com.sscs.msregisterproducts.framework.adapters.in.dto.ProductRequest;
 import br.com.sscs.msregisterproducts.framework.adapters.in.dto.ProductResponse;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ProductService {
@@ -17,4 +18,6 @@ public interface ProductService {
     ProductResponse updateProduct(String productId, ProductRequest request);
 
     void deleteByProductId(String productId);
+
+    ProductResponse updatePartialProduct(String productId, Map<String, Object> fields);
 }

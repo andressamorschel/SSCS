@@ -3,16 +3,19 @@ package br.com.sscs.msregisterproducts.application.service;
 import br.com.sscs.msregisterproducts.application.ports.in.ProductService;
 import br.com.sscs.msregisterproducts.application.ports.out.ProductRepository;
 import br.com.sscs.msregisterproducts.domain.Product;
-import br.com.sscs.msregisterproducts.framework.adapters.out.client.ProductFeignClient;
 import br.com.sscs.msregisterproducts.framework.adapters.in.dto.ProductRequest;
 import br.com.sscs.msregisterproducts.framework.adapters.in.dto.ProductResponse;
 import br.com.sscs.msregisterproducts.framework.adapters.in.exceptions.ProductNotFoundException;
 import br.com.sscs.msregisterproducts.framework.adapters.in.exceptions.ProviderNotFoundException;
 import br.com.sscs.msregisterproducts.framework.adapters.mapper.ProductMapper;
-import lombok.extern.slf4j.Slf4j;
+import br.com.sscs.msregisterproducts.framework.adapters.out.client.ProductFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,11 +24,14 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ProductFeignClient productFeignClient;
+    private final ObjectMapper objectMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper, ProductFeignClient productFeignClient) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper,
+                              ProductFeignClient productFeignClient, ObjectMapper objectMapper) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
         this.productFeignClient = productFeignClient;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -89,5 +95,29 @@ public class ProductServiceImpl implements ProductService {
         }
 
         productRepository.deleteByProductId(productId);
+    }
+
+    @Override
+    public ProductResponse updatePartialProduct(String productId, Map<String, Object> fields) {
+        var product = productRepository.findByProductId(productId);
+
+        if(product.isEmpty()){
+            throw new ProductNotFoundException("product not with id:" + productId);
+        }
+
+        merge(fields, product.get());
+        return updateProduct(productId, productMapper.entityToRequest(product.get()));
+    }
+
+    private void merge(Map<String, Object> sourceData, Product productDestiny) {
+        Product productOrigin = objectMapper.convertValue(sourceData, Product.class);
+
+        sourceData.forEach((nameProperty, valueProperty) -> {
+            Field field = ReflectionUtils.findField(Product.class, nameProperty);
+            field.setAccessible(true);
+            Object newValue = ReflectionUtils.getField(field, productOrigin);
+
+            ReflectionUtils.setField(field, productDestiny, newValue);
+        });
     }
 }

@@ -5,6 +5,7 @@ import br.com.sscs.msregisterproducts.application.ports.out.ProductRepository;
 import br.com.sscs.msregisterproducts.application.service.ProductServiceImpl;
 import br.com.sscs.msregisterproducts.framework.adapters.out.client.ProductFeignClient;
 import br.com.sscs.msregisterproducts.framework.adapters.mapper.ProductMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.context.annotation.Bean;
@@ -15,8 +16,8 @@ import org.springframework.context.annotation.ComponentScan;
 public class BeanConfiguration {
 
     @Bean
-    ProductServiceImpl productServiceImpl(ProductRepository productRepository,
-                                 ProductMapper productMapper, ProductFeignClient productFeignClient) {
-        return new ProductServiceImpl(productRepository, productMapper, productFeignClient);
+    ProductServiceImpl productServiceImpl(ProductRepository productRepository,ProductMapper productMapper,
+                                     ProductFeignClient productFeignClient, ObjectMapper objectMapper) {
+        return new ProductServiceImpl(productRepository, productMapper, productFeignClient, objectMapper);
     }
 }
