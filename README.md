@@ -3,8 +3,11 @@
 <h2>Project status:</h2>🚀 In progress 🚧
 
 ## Description:
-<p>this project is a product inventory and sales control service</p>
-
+this project is an application developed to represent an inventory and sales control system. The application is divided into some microservices that make up the application as a whole, namely:
+### ms-register-provider
+service that manages providers
+### ms-register-products
+service that manages products
 ## Technologies/dependencies:
 * Java
 * Spring Rest
