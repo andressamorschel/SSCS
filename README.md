@@ -25,3 +25,22 @@
 - [ ] Implement unit tests
 - [ ] Implement integration tests
 - [ ] Make API integration with Angular
+
+## Prerequisites to run the application:
+- Docker
+- Java v17
+- Gradle v7.1.4
+## Open and run the project:
+- Clone the repository:
+```bash
+$ git clone https://github.com/andressamorschel/SSCS.git
+```
+- In the root directory, lift the docker container:
+```bash
+$ docker-compose up
+```
+- Go to the directory of one of the services and start:
+```bash
+$ gradle bootrun
+```
+<h4 align="center">Developed by Andressa Morschel👩‍💻</h4>
