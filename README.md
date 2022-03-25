@@ -15,7 +15,8 @@
 * Gradle
 
 ## Features:
-- [x] Configure the docker
+- [x] Configure the Docker
+- [ ] Configure the Jenkins
 - [ ] Create microservice for provider
 - [ ] Create microservice for product
 - [ ] Create microservice for stock
