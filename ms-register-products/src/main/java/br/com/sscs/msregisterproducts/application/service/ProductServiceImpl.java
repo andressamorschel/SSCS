@@ -40,7 +40,8 @@ public class ProductServiceImpl implements ProductService {
                 .findProviderById(request.getProviderId());
 
         if (providerExist.isEmpty()) {
-            throw new ProviderNotFoundException(String.format("provider not found with id: %s", request.getProviderId()));
+            throw new ProviderNotFoundException(String.format("provider not found with id: %s",
+                    request.getProviderId()));
         }
 
         var product = Product.builder()
@@ -101,7 +102,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse updatePartialProduct(String productId, Map<String, Object> fields) {
         var product = productRepository.findByProductId(productId);
 
-        if(product.isEmpty()){
+        if (product.isEmpty()) {
             throw new ProductNotFoundException("product not with id:" + productId);
         }
 
