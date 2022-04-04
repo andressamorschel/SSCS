@@ -25,5 +25,7 @@ public class Provider {
 
     private Address address;
 
+    private boolean activated;
+
 
 }

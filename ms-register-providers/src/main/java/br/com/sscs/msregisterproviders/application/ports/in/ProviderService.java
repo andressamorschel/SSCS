@@ -10,11 +10,11 @@ public interface ProviderService {
 
     ProviderResponse createProvider(ProviderRequest request);
 
-    void deleteByProviderId(String providerId);
-
     ProviderResponse updateProvider(String providerId, ProviderRequest request);
 
     List<ProviderResponse> findAllProviders();
 
     Optional<ProviderResponse> findByProviderId(String providerId);
+
+    void disableProvider(String providerId);
 }

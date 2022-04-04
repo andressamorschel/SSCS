@@ -26,19 +26,10 @@ public class ProviderServiceImpl implements ProviderService {
     public ProviderResponse createProvider(ProviderRequest request) {
         var provider = providerMapper.requestToEntity(request);
         provider.setCreatedOn(LocalDate.now());
+        provider.setActivated(true);
         provider.setProviderId(UUID.randomUUID().toString());
         providerRepository.saveProvider(provider);
         return providerMapper.entityToResponse(provider);
-    }
-
-    @Override
-    public void deleteByProviderId(String providerId) {
-        if (providerRepository.findByProviderId(providerId).isEmpty()) {
-            throw new ProviderNotFoundException(
-                    String.format("provider not found with id: %b", providerId));
-        }
-
-        providerRepository.deleteByProviderId(providerId);
     }
 
     @Override
@@ -69,5 +60,17 @@ public class ProviderServiceImpl implements ProviderService {
         }
 
         return Optional.of(providerMapper.entityToResponse(provider.get()));
+    }
+
+    @Override
+    public void disableProvider(String providerId) {
+        var provider = providerRepository.findByProviderId(providerId);
+
+        if(provider.isEmpty()){
+            throw new ProviderNotFoundException("provider not found");
+        }
+
+        provider.get().setActivated(false);
+        providerRepository.saveProvider(provider.get());
     }
 }

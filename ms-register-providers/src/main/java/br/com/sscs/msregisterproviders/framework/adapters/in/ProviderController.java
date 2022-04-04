@@ -24,12 +24,6 @@ public class ProviderController {
         return providerService.createProvider(request);
     }
 
-    @DeleteMapping("/{providerId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteByProviderId(@PathVariable String providerId) {
-        providerService.deleteByProviderId(providerId);
-    }
-
     @GetMapping
     public List<ProviderResponse> findAllProviders() {
         return providerService.findAllProviders();
@@ -45,5 +39,12 @@ public class ProviderController {
         var provider = providerService.updateProvider(providerId, request);
         return ResponseEntity.ok(provider);
     }
+
+    @PatchMapping("/{providerId}")
+    public ResponseEntity<Void> disableProvider(@PathVariable String providerId){
+        providerService.disableProvider(providerId);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

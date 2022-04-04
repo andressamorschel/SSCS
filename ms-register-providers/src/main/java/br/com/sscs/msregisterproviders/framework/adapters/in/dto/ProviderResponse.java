@@ -21,4 +21,6 @@ public class ProviderResponse {
     private String telephone;
 
     private Address address;
+
+    private boolean activated;
 }

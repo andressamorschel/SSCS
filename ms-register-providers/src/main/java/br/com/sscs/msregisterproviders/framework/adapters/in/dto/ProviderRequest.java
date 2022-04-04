@@ -27,4 +27,7 @@ public class ProviderRequest {
     @NotNull
     private Address address;
 
+    @JsonIgnore
+    private boolean activated;
+
 }
