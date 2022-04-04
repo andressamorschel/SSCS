@@ -1,4 +1,4 @@
-package br.com.sscs.msregisterproviders.domain.enums;
+package br.com.sscs.msregisterproviders.domain;
 
 import lombok.Data;
 

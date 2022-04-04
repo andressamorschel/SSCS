@@ -1,6 +1,6 @@
 package br.com.sscs.msregisterproviders.framework.adapters.in.dto;
 
-import br.com.sscs.msregisterproviders.domain.enums.Address;
+import br.com.sscs.msregisterproviders.domain.Address;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
