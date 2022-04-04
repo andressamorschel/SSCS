@@ -20,8 +20,8 @@ service that manages products
 ## Features:
 - [x] Configure the Docker
 - [ ] Configure the Jenkins
-- [ ] Create microservice for provider
-- [ ] Create microservice for product
+- [x] Create microservice for provider
+- [x] Create microservice for product
 - [ ] Create microservice for stock
 - [ ] Create microservice for sales
 - [ ] Implement spring security
